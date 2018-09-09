@@ -4,6 +4,7 @@ import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +29,16 @@ public class Menu1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Sensoriamento em tempo real");
+        getActivity().setTitle(Html.fromHtml("<small>Sensoriamento em tempo real<small>"));
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu1, container, false);
-        tvTemperaturaAmbiente = (TextView) view.findViewById(R.id.tvTemperaturaAmbiente);
-        tvUmidadeAmbiente = (TextView) view.findViewById(R.id.tvUmidadeAmbiente);
-        tvUmidadeSolo = (TextView) view.findViewById(R.id.tvUmidadeSolo);
+//        tvTemperaturaAmbiente = (TextView) view.findViewById(R.id.tvTemperaturaAmbiente);
+//        tvUmidadeAmbiente = (TextView) view.findViewById(R.id.tvUmidadeAmbiente);
+//        tvUmidadeSolo = (TextView) view.findViewById(R.id.tvUmidadeSolo);
 
         thread = new Thread(new Runnable() {
             public void run() {
@@ -51,18 +52,18 @@ public class Menu1 extends Fragment {
                 }
             }
         });
-        thread.start();
+//        thread.start();
         return view;
     }
 
     public StringRequest getRequestSensoriamentoTempoReal() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.43.37/realtime",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://192.168.43.37",
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
-                        tvUmidadeAmbiente.setText(response.split("@")[0] + "%");
-                        tvTemperaturaAmbiente.setText(response.split("@")[1] + "°");
-                        tvUmidadeSolo.setText(response.split("@")[2]);
+//                        tvUmidadeAmbiente.setText(response.split("@")[0] + "%");
+//                        tvTemperaturaAmbiente.setText(response.split("@")[1] + "°");
+//                        tvUmidadeSolo.setText(response.split("@")[2]);
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
