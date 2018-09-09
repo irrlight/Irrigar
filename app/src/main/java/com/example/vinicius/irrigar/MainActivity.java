@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_menu3:
-                fragment = new Menu3();
+                fragment = new Menu4();
                 break;
 
         }
